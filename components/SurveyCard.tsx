@@ -7,11 +7,11 @@ interface CardProps {
 }
 
 const SurveyCard: React.FC<CardProps> = ({ data }) => {
-  const handleDeleteSurvey = (id: number | undefined, event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleDeleteSurvey = (id: number) => {
     deleteSurvey(id)
       .then(response => {
         if(response)
-        console.log("deleted");
+          console.log("deleted");
       });
   };
 

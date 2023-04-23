@@ -3,17 +3,6 @@ import { Form, Button, Col, Row } from 'react-bootstrap';
 import { createSurvey } from '../services/SurveyService';
 import { useRouter } from "next/router";
 
-interface Option {
-  index: number;
-  name: string;
-}
-
-interface Survey {
-  name: string;
-  description: string;
-  options: Option[];
-}
-
 const SurveyForm: React.FC = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -46,7 +35,7 @@ const SurveyForm: React.FC = () => {
     createSurvey(survey)
       .then(response => {
         if(response)
-        router.push("/");
+          router.push("/");
       });
   };
 

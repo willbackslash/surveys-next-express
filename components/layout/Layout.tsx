@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { Navbar, Nav, Button } from 'react-bootstrap';
-import { redirect } from 'next/dist/server/api-utils';
 
 interface Props {
   children: ReactNode;

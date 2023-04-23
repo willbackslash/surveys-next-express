@@ -27,27 +27,27 @@ async function remove(req: NextApiRequest, res: NextApiResponse) {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    if (req.method == 'POST') {
-      return await create(req, res);
-    }
+  if (req.method == 'POST') {
+    return await create(req, res);
+  }
 
-    if (req.method == 'DELETE') {
-      return await remove(req, res);
-      // TODO: add reload or redirect to homepage
-    }
+  if (req.method == 'DELETE') {
+    return await remove(req, res);
+    // TODO: add reload or redirect to homepage
+  }
 
-    const session = await getServerSession(req, res, authOptions)
-    console.log("session endpoint final", session);
-    if(!session) res.status(401).json({"response": "Unauthorized", "code": 401})
-    //if(!session.user.groups.includes('SURVEY_ADMIN')){
-     //   res.status(400).json({"response": "Unauthorized", "code": 401})
-    //}
+  const session = await getServerSession(req, res, authOptions)
+  console.log("session endpoint final", session);
+  if(!session) res.status(401).json({"response": "Unauthorized", "code": 401})
+  //if(!session.user.groups.includes('SURVEY_ADMIN')){
+  //   res.status(400).json({"response": "Unauthorized", "code": 401})
+  //}
 
-    try {
-      const result = await prisma.survey.findMany({include: { options: true },});
-      res.status(200).json(result);
-    } catch (err) {
-      console.log(err);
-      res.status(403).json({ err: "Error occured." });
-    }
+  try {
+    const result = await prisma.survey.findMany({include: { options: true },});
+    res.status(200).json(result);
+  } catch (err) {
+    console.log(err);
+    res.status(403).json({ err: "Error occured." });
+  }
 }

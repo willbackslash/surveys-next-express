@@ -6,9 +6,9 @@ import Layout from '../../components/layout/Layout';
 const SurveyCreate: React.FC = () => {
   return (
     <Layout>
-        <div className="container mrgnbtm">
-            <SurveyForm></SurveyForm>
-        </div>
+      <div className="container mrgnbtm">
+        <SurveyForm></SurveyForm>
+      </div>
     </Layout>
   );
 }
