@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./surveys.db"
+}
+
+model Survey {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  options     Option[]
+}
+
+model Option {
+  id      Int     @id @default(autoincrement())
+  index   Int
+  name    String
+  survey  Survey? @relation(fields: [surveyId], references: [id])
+  surveyId Int?
+}
