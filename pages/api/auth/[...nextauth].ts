@@ -1,4 +1,4 @@
-import NextAuth, { Session } from 'next-auth'
+import NextAuth, { Account, Session } from 'next-auth'
 import { JWT } from 'next-auth/jwt/types';
 import Okta from 'next-auth/providers/okta'
 
@@ -21,7 +21,8 @@ export const authOptions = {
         }),
     ],
     callbacks: {
-        async jwt({ account, token, profile }): Promise<any> {
+        async jwt({ account, token, profile }: {token: JWT, 
+          account: Account, profile: CustomProfile}): Promise<JWT> {
             if (account) {
                 token.accessToken = account.access_token
                 token.id = profile.id
@@ -29,14 +30,16 @@ export const authOptions = {
               }
               return token
         },
-        async session({ session, token }: { session: Session; token: JWT }) {
-          session.user.groups = token.groups;
-          session.user.id = token.sub;
-          session.user.hard = "code";
+        async session({ session, token }: { session: CustomSession; token: CustomJWT }) {
+          if(session.user){
+            session.user.groups = token.groups;
+            session.user.id = token.sub;
+          }
           return session;
         },
       },
     secret: process.env.NEXTAUTH_SECRET as string
 }
 
+// @ts-ignore
 export default NextAuth(authOptions)

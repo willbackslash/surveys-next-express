@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Header } from './Header'
 import { Users } from './Users'
-import { getAllSurveys, createUser } from '../services/SurveyService'
+import { getAllSurveys } from '../services/SurveyService'
 import LoginButton from './LoginButton';
 import SurveyCard from './SurveyCard';
 import { Button } from 'react-bootstrap';
@@ -22,15 +22,6 @@ const App: React.FC = () => {
   const [user, setUser] = useState<User>({ firstName: '', lastName: '', email: '' });
   const [surveys, setSurveys] = useState<SurveyData[]>([]);
   const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
-
-  const handleCreateUser = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    createUser(user)
-      .then(response => {
-        console.log(response);
-        setNumberOfUsers(prevCount => prevCount + 1);
-      });
-  }
 
   const handleGetAllSurveys = (): void => {
     getAllSurveys()
@@ -75,7 +66,7 @@ const App: React.FC = () => {
   );*/
 
   return (
-    <Layout className="App">
+    <Layout>
       <div className="container mrgnbtm">
         <Button href='/surveys/create' variant="primary">Create survey</Button>
       </div>

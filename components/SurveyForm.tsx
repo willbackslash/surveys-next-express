@@ -20,7 +20,7 @@ const SurveyForm: React.FC = () => {
   const [options, setOptions] = useState<Option[]>([{ index: 0, name: '' }]);
   const router = useRouter();
 
-  const handleOptionChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOptionChange = (index: number, event: React.ChangeEvent<any>) => {
     const newOptions = [...options];
     newOptions[index].name = event.target.value;
     setOptions(newOptions);
