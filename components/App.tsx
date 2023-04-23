@@ -9,6 +9,7 @@ import { Button } from 'react-bootstrap';
 import { Survey } from '@prisma/client';
 import SurveyForm from './SurveyForm';
 import Link from 'next/link';
+import Layout from './layout/Layout';
 interface User {
   firstName: string;
   lastName: string;
@@ -56,6 +57,7 @@ const App: React.FC = () => {
     });
   }, []);
 
+  /*
   return (
     <div className="App">
       <Header></Header>
@@ -70,6 +72,19 @@ const App: React.FC = () => {
       <SurveyForm></SurveyForm>
       <LoginButton/>
     </div>
+  );*/
+
+  return (
+    <Layout className="App">
+      <div className="container mrgnbtm">
+        <Button href='/surveys/create' variant="primary">Create survey</Button>
+      </div>
+      <div className='row'>
+        {surveys.map(survey => (
+        <SurveyCard data={survey} />
+        ))}
+      </div>
+    </Layout>
   );
 }
 
