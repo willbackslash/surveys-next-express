@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "start:dev": "NODE_ENV='development' node server.js",
-    "build": "next build",
+    "build": "next build && prisma generate",
     "start": "next start",
     "test": "jest",
     "lint": "next lint",
