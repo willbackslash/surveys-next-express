@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "start:dev": "NODE_ENV='development' node server.js",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "test": "jest",
     "lint": "next lint",
