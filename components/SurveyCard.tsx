@@ -7,7 +7,7 @@ interface CardProps {
 }
 
 const SurveyCard: React.FC<CardProps> = ({ data }) => {
-  const handleDeleteSurvey = (id: number) => {
+  const handleDeleteSurvey = (id: number | undefined) => {
     deleteSurvey(id)
       .then(response => {
         if(response)
@@ -26,7 +26,7 @@ const SurveyCard: React.FC<CardProps> = ({ data }) => {
           ))}
         </ListGroup>
         <Button variant="primary">Vote</Button>
-        <Button onClick={(e) => handleDeleteSurvey(data.id, e)} variant="danger">Delete</Button>
+        <Button onClick={() => handleDeleteSurvey(data.id)} variant="danger">Delete</Button>
       </Card.Body>
     </Card>
   );
