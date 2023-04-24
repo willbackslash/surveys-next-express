@@ -54,7 +54,7 @@ const SurveyForm: React.FC = () => {
       <Form.Group controlId="formSurveyOptions">
         <Form.Label>Options</Form.Label>
         {options.map((option, index) => (
-          <Row key={index}>
+          <Row key={index} className="my-3">
             <Col>
               <Form.Control type="text" placeholder={`Option ${index+1}`} value={option.name} onChange={(e) => handleOptionChange(index, e)} />
             </Col>

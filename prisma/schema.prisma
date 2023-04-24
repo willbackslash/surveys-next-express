@@ -18,12 +18,25 @@ model Survey {
   name        String
   description String?
   options     Option[]
+  answers     Answer[]
 }
 
 model Option {
   id      Int     @id @default(autoincrement())
   index   Int
   name    String
-  survey  Survey? @relation(fields: [surveyId], references: [id])
+  survey  Survey? @relation(fields: [surveyId], references: [id], onDelete: Cascade)
   surveyId Int?
+  answers  Answer[]
+}
+
+model Answer {
+  id        Int    @id @default(autoincrement())
+  userEmail String
+  option    Option @relation(fields: [optionId], references: [id])
+  optionId  Int
+  survey    Survey @relation(fields: [surveyId], references: [id], onDelete: Cascade)
+  surveyId  Int
+
+  @@unique([userEmail, surveyId])
 }

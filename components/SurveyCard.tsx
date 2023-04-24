@@ -26,7 +26,7 @@ const SurveyCard: React.FC<CardProps> = ({ data, isAdmin, isBasicUser }) => {
             <ListGroupItem key={option.index}>{option.name}</ListGroupItem>
           ))}
         </ListGroup>
-        {isBasicUser && <Button className='mr-2 my-3' variant="primary">Vote</Button>}
+        {isBasicUser && <Button className='mr-2 my-3' variant="primary" href={`/surveys/vote/${data.id}`}>Vote</Button>}
         {isAdmin && <Button className='my-3' onClick={() => handleDeleteSurvey(data.id)} variant="danger">Delete</Button>}
       </Card.Body>
     </Card>
