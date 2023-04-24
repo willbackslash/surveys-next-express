@@ -13,7 +13,6 @@ const Vote: React.FC = () => {
   useEffect(() => {
     if(id) {
       getSurveyById(Number(id)).then(survey => {
-        console.log(survey)
         setSurvey(survey);
       })
     }

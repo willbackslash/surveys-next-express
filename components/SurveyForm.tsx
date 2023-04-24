@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Col, Row } from 'react-bootstrap';
+import { Form, Button, Col, Row, Alert } from 'react-bootstrap';
 import { createSurvey } from '../services/SurveyService';
 import { useRouter } from "next/router";
 
@@ -7,6 +7,7 @@ const SurveyForm: React.FC = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [options, setOptions] = useState<Option[]>([{ index: 0, name: '' }]);
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleOptionChange = (index: number, event: React.ChangeEvent<any>) => {
@@ -29,9 +30,11 @@ const SurveyForm: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // You can do whatever you want with the form data here
+    if(name === '' || options.some(option => option.name === '')) {
+      setError('Please fill in all fields.');
+      return;
+    }
     const survey: SurveyCreate = { name, description, options: {create: options} };
-    console.log(survey);
     createSurvey(survey)
       .then(response => {
         if(response)
@@ -41,6 +44,7 @@ const SurveyForm: React.FC = () => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      {error && <Alert variant="danger">{error}</Alert>}
       <Form.Group controlId="formSurveyName">
         <Form.Label>Survey Name</Form.Label>
         <Form.Control type="text" placeholder="Enter survey name" value={name} onChange={(e) => setName(e.target.value)} />
