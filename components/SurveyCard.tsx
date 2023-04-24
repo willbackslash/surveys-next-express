@@ -10,10 +10,12 @@ interface CardProps {
 
 const SurveyCard: React.FC<CardProps> = ({ data, isAdmin, isBasicUser }) => {
   const handleDeleteSurvey = (id: number | undefined) => {
-    deleteSurvey(id)
-      .then(response => {
-        if(response) window.location.reload();
-      });
+    if(id) {
+      deleteSurvey(id)
+        .then(response => {
+          if(response) window.location.reload();
+        });
+    }
   };
 
   return (
