@@ -1,5 +1,11 @@
 # Surveys App
 preview url: http://surveys-next.vercel.app
+
+## Stack
+- NextJS
+- Prisma 
+- Postgres
+
 ## Getting Started
 1. Update the .env file with your postgres database url
 > DATABASE_URL="postgresql://....."
