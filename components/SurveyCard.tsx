@@ -4,19 +4,20 @@ import { deleteSurvey } from '../services/SurveyService';
 
 interface CardProps {
   data: SurveyData;
+  isAdmin: Boolean;
+  isBasicUser: Boolean;
 }
 
-const SurveyCard: React.FC<CardProps> = ({ data }) => {
+const SurveyCard: React.FC<CardProps> = ({ data, isAdmin, isBasicUser }) => {
   const handleDeleteSurvey = (id: number | undefined) => {
     deleteSurvey(id)
       .then(response => {
-        if(response)
-          console.log("deleted");
+        if(response) window.location.reload();
       });
   };
 
   return (
-    <Card>
+    <Card className='h-100'>
       <Card.Body>
         <Card.Title>{data.name}</Card.Title>
         <Card.Text>{data.description}</Card.Text>
@@ -25,8 +26,8 @@ const SurveyCard: React.FC<CardProps> = ({ data }) => {
             <ListGroupItem key={option.index}>{option.name}</ListGroupItem>
           ))}
         </ListGroup>
-        <Button variant="primary">Vote</Button>
-        <Button onClick={() => handleDeleteSurvey(data.id)} variant="danger">Delete</Button>
+        {isBasicUser && <Button className='mr-2 my-3' variant="primary">Vote</Button>}
+        {isAdmin && <Button className='my-3' onClick={() => handleDeleteSurvey(data.id)} variant="danger">Delete</Button>}
       </Card.Body>
     </Card>
   );

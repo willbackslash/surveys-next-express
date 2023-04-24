@@ -17,6 +17,11 @@ async function create(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function remove(req: NextApiRequest, res: NextApiResponse) {
+  const session = await getServerSession(req, res, authOptions)
+  // @ts-ignore
+  if (!session?.user?.groups.includes('SURVEY_ADMINs')) {
+    return res.status(400).json({"response": "Unauthorized", "code": 401})
+  }
   try {
     const result = await prisma.survey.delete({ where: {id: req.body.id,}, include: {options: true}});
     res.status(200).json(result);

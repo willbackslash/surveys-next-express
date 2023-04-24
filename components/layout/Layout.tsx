@@ -14,7 +14,7 @@ const Layout = ({ children }: Props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/surveys/create">Create New Survey</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
           </Nav>
           <Nav>
             <Button variant="outline-secondary" onClick={()=>signOut({ callbackUrl: "/", redirect: true})}>Logout</Button>
